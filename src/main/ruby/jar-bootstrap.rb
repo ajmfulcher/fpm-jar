@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
-$: << File.join(File.dirname(__FILE__), "..", "lib")
+# Nasty kludge to get the jar:file uri.
+# There must be a better way.
+java_base = Gem::dir.split('!')[0]
 
-dirs = Dir.glob File.join(File.dirname(__FILE__),"gems","*","lib")
+dirs = Dir.glob "#{java_base}!/gems/*/lib"
 dirs.each{|dir| $LOAD_PATH.unshift dir}
 
 require "fpm"
